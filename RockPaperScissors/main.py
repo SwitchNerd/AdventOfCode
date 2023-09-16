@@ -1,7 +1,7 @@
 score = 0
-rock1 = 'X'
-paper1 = 'Y'
-scissors1 = 'Z'
+lose = 'X'
+draw = 'Y'
+win = 'Z'
 
 rock2 = 'A'
 paper2 = 'B'
@@ -12,38 +12,30 @@ with open("outcomes.txt",'r') as data:
         enemy = comb[0]
         user = comb[2]
 
-        #getting the decisions score
-        if user == rock1:
-            score += 1
-        elif user == paper1:
-            score += 2
-        elif user == scissors1:
-            score += 3
-            
+        if user == lose:
+            score += 0
+            if enemy == scissors2: #this means user is paper 
+                score = score + 2
+            elif enemy == rock2: #this means user is scissors
+                score = score + 3
+            elif enemy == paper2: #this means user is rock
+                score = score + 1
 
-        #getting the match result score
-        #user wins
-        if user == rock1 and enemy == scissors2:
-            score = score + 6
-        elif user == paper1 and enemy == rock2:
-            score = score + 6
-        elif user == scissors1 and enemy == paper2:
-            score = score + 6
-            
-        #draw
-        elif user == rock1 and enemy == rock2:
-            score = score + 3
-        elif user == paper1 and enemy == paper2:
-            score = score + 3
-        elif user == scissors1 and enemy == scissors2:
-            score = score + 3
-            
-        #enemy wins
-        elif user == rock1 and enemy == paper2:
-            score = score + 0
-        elif user == paper1 and enemy == scissors2:
-            score = score + 0
-        elif user == scissors1 and enemy == rock2:
-            score = score + 0
-    
+        elif user == draw:
+            score += 3
+            if enemy == scissors2: #this means user is scissors 
+                score = score + 3
+            elif enemy == rock2: #this means user is rock
+                score = score + 1
+            elif enemy == paper2: #this means user is paper
+                score = score + 2
+        elif user == win:
+            score += 6
+            if enemy == scissors2: #this means user is rock 
+                score = score + 1
+            elif enemy == rock2: #this means user is paper
+                score = score + 2
+            elif enemy == paper2: #this means user is scissors
+                score = score + 3
+        
     print(score)
